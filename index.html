@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audiobuck - Premium Music Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="theme.css" />
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+
+<body>
+    <!-- Full Viewport Immersive Ambient Background -->
+    <div class="app-background">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <div class="app-wrapper">
+        <!-- Floating Top Bar / Search Navigation -->
+        <header class="top-bar">
+            <div class="top-nav-controls">
+                <button class="glass-icon-btn" id="btn-top-back" title="Back"><i class="ri-arrow-left-s-line"></i></button>
+                <button class="glass-icon-btn" id="btn-top-forward" title="Forward"><i class="ri-arrow-right-s-line"></i></button>
+            </div>
+            
+            <div class="top-search-capsule">
+                <i class="ri-lock-line search-icon-left"></i>
+                <span class="app-brand-name">Audiobuck</span>
+                <input type="text" id="search-input" placeholder="Search music, songs, artists..." autocomplete="off" />
+                <button class="search-trigger-btn" title="Refresh Search" id="btn-search-refresh">
+                    <i class="ri-refresh-line"></i>
+                </button>
+                <button class="search-trigger-btn" title="Theme Settings">
+                    <i class="ri-sun-line"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="app-main-body">
+            <!-- Floating Left Vertical Navigation Sidebar -->
+            <aside class="left-sidebar">
+                <button class="nav-item active" data-view="overview" title="Home">
+                    <i class="ri-home-5-line"></i>
+                    <span class="nav-tooltip">Home</span>
+                </button>
+                <button class="nav-item" id="btn-sidebar-notif" title="Notifications">
+                    <i class="ri-notification-3-line"></i>
+                    <span class="nav-tooltip">Notifications</span>
+                </button>
+                <button class="nav-item" data-view="overview" title="Library">
+                    <i class="ri-bar-chart-2-line"></i>
+                    <span class="nav-tooltip">Library</span>
+                </button>
+                <button class="nav-item" id="btn-sidebar-fav" title="Favorites">
+                    <i class="ri-disc-line"></i>
+                    <span class="nav-tooltip">Favorites</span>
+                </button>
+                <button class="nav-item" id="btn-sidebar-settings" title="Settings">
+                    <i class="ri-settings-4-line"></i>
+                    <span class="nav-tooltip">Settings</span>
+                </button>
+            </aside>
+
+            <!-- Main Central Glassmorphism Dashboard -->
+            <main class="glass-dashboard">
+                <!-- Dashboard Sub-Header with Navigation Tabs -->
+                <div class="dashboard-nav">
+                    <div class="dash-history-btns">
+                        <button class="glass-icon-btn sm" id="dash-back" title="Back"><i class="ri-arrow-left-s-line"></i></button>
+                        <button class="glass-icon-btn sm" id="dash-forward" title="Forward"><i class="ri-arrow-right-s-line"></i></button>
+                    </div>
+
+                    <nav class="dashboard-tabs">
+                        <button class="tab-item active" data-tab="overview">Overview</button>
+                        <button class="tab-item" data-tab="related">Related Artist</button>
+                        <button class="tab-item" data-tab="lyrics">Lyrics</button>
+                    </nav>
+                </div>
+
+                <!-- Tab 1: Overview Dashboard Content -->
+                <div class="tab-pane active" id="pane-overview">
+                    <!-- Hero Section -->
+                    <section class="artist-hero">
+                        <div class="hero-text-content">
+                            <span class="hero-badge">Artist</span>
+                            <h1 id="hero-artist-name">AP Dhillon</h1>
+                            <p class="hero-songs-count">
+                                <i class="ri-headphone-line"></i> <span id="songs-total-count">6 songs Total</span>
+                            </p>
+
+                            <div class="hero-action-btns">
+                                <button id="btn-follow" class="pill-btn glass-btn">
+                                    <i class="ri-user-add-line"></i> <span id="follow-text">Following</span>
+                                </button>
+                                <button id="btn-play-all" class="pill-btn primary-btn">
+                                    <i class="ri-play-fill"></i> Play all
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="hero-visual-container">
+                            <div class="hero-ambient-glow"></div>
+                            <img id="hero-artist-image" src="https://i1.sndcdn.com/artworks-9mdJ7HyOXEo5jNHd-Lcpkeg-t1080x1080.jpg" alt="Artist Visual" />
+                        </div>
+                    </section>
+
+                    <!-- Top Playlist Section -->
+                    <section class="playlist-section">
+                        <div class="playlist-title-bar">
+                            <h2>Top Playlist</h2>
+                            <div class="playlist-nav">
+                                <button class="glass-icon-btn sm" id="playlist-nav-left" title="Previous"><i class="ri-arrow-left-s-line"></i></button>
+                                <button class="glass-icon-btn sm" id="playlist-nav-right" title="Next"><i class="ri-arrow-right-s-line"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Song List container -->
+                        <div class="song-list">
+                            <!-- Populated dynamically by script.js -->
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tab 2: Related Artist -->
+                <div class="tab-pane" id="pane-related">
+                    <div class="related-grid">
+                        <div class="artist-card">
+                            <div class="card-thumb">
+                                <img src="https://i1.sndcdn.com/artworks-9mdJ7HyOXEo5jNHd-Lcpkeg-t1080x1080.jpg" alt="AP Dhillon" />
+                            </div>
+                            <h3>AP Dhillon</h3>
+                            <p>Punjabi, Urban, Hip-Hop</p>
+                            <button class="pill-btn glass-btn sm btn-select-artist" data-artist="AP Dhillon">View Tracks</button>
+                        </div>
+
+                        <div class="artist-card">
+                            <div class="card-thumb">
+                                <img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a7/8f/bb/a78fbb01-b0aa-5bab-cc91-4d585d3ffee3/23UMGIM85552.rgb.jpg/400x400bb.webp" alt="B Praak" />
+                            </div>
+                            <h3>B Praak</h3>
+                            <p>Desi Melodies, Soul</p>
+                            <button class="pill-btn glass-btn sm btn-select-artist" data-artist="B Praak">View Tracks</button>
+                        </div>
+
+                        <div class="artist-card">
+                            <div class="card-thumb">
+                                <img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ec/68/d4/ec68d41a-ddc0-092e-34fa-11074dbacaa0/Aavan-Jaavan-Hindi-Audio-Cover-wc.jpg/800x800cc.jpg" alt="Arijit Singh" />
+                            </div>
+                            <h3>Arijit Singh</h3>
+                            <p>Romantic, Melodic</p>
+                            <button class="pill-btn glass-btn sm btn-select-artist" data-artist="Arijit Singh">View Tracks</button>
+                        </div>
+
+                        <div class="artist-card">
+                            <div class="card-thumb">
+                                <img src="https://c.saavncdn.com/419/blue-English-2024-20250827050756-500x500.jpg" alt="yung kai" />
+                            </div>
+                            <h3>yung kai</h3>
+                            <p>Indie, Bedroom Pop</p>
+                            <button class="pill-btn glass-btn sm btn-select-artist" data-artist="yung kai">View Tracks</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Lyrics View -->
+                <div class="tab-pane" id="pane-lyrics">
+                    <div class="lyrics-card">
+                        <div class="lyrics-header-info">
+                            <img id="lyrics-song-cover" src="https://i1.sndcdn.com/artworks-9mdJ7HyOXEo5jNHd-Lcpkeg-t1080x1080.jpg" alt="Song Cover" />
+                            <div>
+                                <h2 id="lyrics-song-title">With You</h2>
+                                <p id="lyrics-song-artist">AP Dhillon</p>
+                            </div>
+                        </div>
+                        <div class="lyrics-scroll-box">
+                            <p class="lyric-line active">♪ Tere naal seekha main te hasna ♪</p>
+                            <p class="lyric-line">Tere naal seekha dil lagana</p>
+                            <p class="lyric-line">Tu hove te har lamha hai sohna</p>
+                            <p class="lyric-line">Tere bina jeena bhi kya jeena</p>
+                            <p class="lyric-line">♪ Listening with Audiobuck Glass Player ♪</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Floating Bottom Glass Music Player Bar -->
+        <footer class="bottom-player">
+            <div id="player" class="floating-player-bar">
+                <!-- Playback Control Buttons -->
+                <div class="playback-controls">
+                    <button id="btn-backward" class="ctrl-btn" title="Previous Track"><i class="ri-skip-back-fill"></i></button>
+                    <button id="btn-play" class="ctrl-btn main-play-btn" title="Play/Pause"><i class="ri-play-large-fill"></i></button>
+                    <button id="btn-forward" class="ctrl-btn" title="Next Track"><i class="ri-skip-forward-fill"></i></button>
+                </div>
+
+                <!-- Currently Playing Song Details -->
+                <div class="current-track-meta">
+                    <div id="img" class="track-artwork"></div>
+                    <div class="track-text">
+                        <h4 id="player-song-title">With You</h4>
+                        <p id="player-singer-name">AP Dhillon</p>
+                    </div>
+                </div>
+
+                <!-- Timeline / Progress Seek Bar -->
+                <div class="timeline-box">
+                    <span id="time-current">0:00</span>
+                    <div id="range" class="slider-wrapper">
+                        <input type="range" id="progress-range" value="0" min="0" max="100" step="0.01" />
+                    </div>
+                    <span id="time-total">0:00</span>
+                </div>
+
+                <!-- Extra Player Actions & Volume Bar -->
+                <div class="extra-actions">
+                    <button id="btn-like" class="ctrl-btn-sm" title="Favorite"><i class="ri-heart-line"></i></button>
+                    <button id="btn-lyrics-quick" class="ctrl-btn-sm" title="Toggle Lyrics"><i class="ri-chat-voice-line"></i></button>
+                    <button id="btn-queue-toggle" class="ctrl-btn-sm" title="Queue List"><i class="ri-function-line"></i></button>
+                    
+                    <div class="volume-slider-group">
+                        <button id="btn-volume-mute" class="ctrl-btn-sm" title="Mute/Unmute"><i class="ri-volume-up-line"></i></button>
+                        <input type="range" id="volume-range" value="100" min="0" max="100" step="1" />
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Hidden compatibility structure for legacy queries -->
+    <div class="left" style="display: none;">
+        <div id="img"></div>
+        <h3>heading</h3>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
